@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .message {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .message.success {
+            color: green;
+        }
+        .message.error {
+            color: red;
+        }
+        .order-details {
+            margin-top: 20px;
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
+        }
+        .order-details p {
+            margin: 5px 0;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Order Confirmation</h1>
+        <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if ($response['status'] === 'success') {
+                echo '<div class="message success">Order placed successfully!</div>';
+                echo '<div class="order-details">';
+                echo '<p><strong>Order ID:</strong> ' . $response['orderId'] . '</p>';
+                echo '<p><strong>Amount to Pay:</strong> ' . $response['amountToPay'] . ' Rs</p>';
+                echo '</div>';
+            } else {
+                echo '<div class="message error">Failed to place the order. Please try again.</div>';
+            }
+        }
+        ?>
+        <button onclick="window.location.href = 'index.php';">Continue Shopping</button>
+    </div>
+</body>
+</html>
